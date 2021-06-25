@@ -1,0 +1,35 @@
+$c: #f38961, #d27a70, #9d6976;
+$t: 3s;
+
+@property --a {
+	syntax: '<angle>';
+	initial-value: 0deg;
+	inherits: false
+}
+
+body {
+	--tmp: repeat(var(--n), calc(96vmin/var(--n)));
+	display: grid;
+	grid-template: var(--tmp)/ var(--tmp);
+	place-content: center;
+	overflow-x: hidden;
+	margin: 0;
+	height: 100vh;
+	background: #edd7c2;
+	color: #836179;
+	filter: drop-shadow(0 0 2px currentcolor)
+}
+
+.cell {
+	--m: calc(.5*(var(--n) - 1));
+	--abs-i: max(var(--m) - var(--i), var(--i) - var(--m));
+	--abs-j: max(var(--m) - var(--j), var(--j) - var(--m));
+	box-shadow: inset 0 0 2px currentcolor;
+	background: 
+		linear-gradient(var(--a, 0deg), 
+				nth($c, 1) 33%, nth($c, 2) 34% 66%, nth($c, 3) 67%);
+	animation: a $t linear 
+		calc((.5*(var(--abs-i) + var(--abs-j))/var(--m) - 1)*#{$t}) infinite
+}
+
+@keyframes a { to { --a: 1turn } }

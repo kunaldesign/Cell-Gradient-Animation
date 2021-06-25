@@ -1,0 +1,39 @@
+@property --a {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+body {
+  --tmp: repeat(var(--n), calc(96vmin/var(--n)));
+  display: grid;
+  grid-template: var(--tmp)/var(--tmp);
+  place-content: center;
+  overflow-x: hidden;
+  margin: 0;
+  height: 100vh;
+  background: #edd7c2;
+  color: #836179;
+  filter: drop-shadow(0 0 2px currentcolor);
+}
+
+.cell {
+  --m: calc(.5*(var(--n) - 1));
+  --abs-i: max(var(--m) - var(--i), var(--i) - var(--m));
+  --abs-j: max(var(--m) - var(--j), var(--j) - var(--m));
+  box-shadow: inset 0 0 2px currentcolor;
+  background: linear-gradient(var(--a, 0deg), #f38961 33%, #d27a70 34% 66%, #9d6976 67%);
+  -webkit-animation: a 3s linear calc((.5*(var(--abs-i) + var(--abs-j))/var(--m) - 1)*3s) infinite;
+          animation: a 3s linear calc((.5*(var(--abs-i) + var(--abs-j))/var(--m) - 1)*3s) infinite;
+}
+
+@-webkit-keyframes a {
+  to {
+    --a: 1turn ;
+  }
+}
+
+@keyframes a {
+  to {
+    --a: 1turn ;
+  }
+}/*# sourceMappingURL=style.css.map */
